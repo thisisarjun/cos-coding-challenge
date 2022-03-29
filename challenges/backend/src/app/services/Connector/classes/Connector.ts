@@ -1,12 +1,12 @@
 import { IConnector } from "../interface/IConnector";
 import axios, { AxiosRequestConfig } from 'axios'
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { ILogger } from "../../Logger/interface/ILogger";
 import { DependencyIdentifier } from "../../../DependencyIdentifiers";
-import _ = require('lodash');
+import * as _ from 'lodash';
 
 
-
+@injectable()
 export class Connector implements IConnector{
 
   private _logger;
@@ -22,6 +22,7 @@ export class Connector implements IConnector{
       params,
       url,
       data,
+      method
     } = reqOptions;
     let {
       headers
@@ -32,7 +33,13 @@ export class Connector implements IConnector{
           'accept' : 'application/json',
         }
       }
+      this._logger.debug(`Initiating a ${method} request on ${url} with
+        headers: ${JSON.stringify(headers)}
+        params: ${JSON.stringify(params)}
+        data: ${JSON.stringify(data)}
+      `)
       const res = await axios.request({
+        method,
         url,
         headers,
         params,
@@ -41,14 +48,12 @@ export class Connector implements IConnector{
       return res?.data;
     }catch(error: any){
       if (error.response) {
-        this._logger.log(`Error in request | responseStatus: ${error.response.status} `)
-        this._logger.log(`Response Data: ${error.response.data}`)
+        this._logger.error(`Error in request | responseStatus: ${error.response.status} `)
+        this._logger.error('Response Data:', error.response.data)
       } else if (error.request) {
-        this._logger.log(`Request did not receive any response`)
-        this._logger.log(error.request);
+        this._logger.error(`Request did not receive any response`, error.request)
       } else {
-        this._logger.log(`Unknown Error `);
-        this._logger.log(error.message);
+        this._logger.error(`Unknown Error: ${error.message}`);
       }
       throw error;
     }

@@ -9,8 +9,16 @@ export class Logger implements ILogger {
     }
 
 
-    public log(message: string): void {
-        console.log(`[LOG]: ${message}`);
+    public log(message: string, obj?: Record<string, any>): void {
+        console.log(`[LOG]: ${message}`, obj);
+    }
+
+    public error(message: string, obj?: Record<string, any>): void {
+        console.error(`[ERROR]: ${message}`, obj);
+    }
+
+    public debug(message: string, obj?: Record<string, any>): void {
+        console.debug(`[DEBUG]: ${message}`, obj);
     }
 
 }
