@@ -28,10 +28,9 @@ export class Connector implements IConnector{
       headers
     } = reqOptions;
     try{
-      if(_.isEmpty(headers)){
-        headers = {
-          'accept' : 'application/json',
-        }
+      headers = headers || {};
+      if(!headers.accept){
+        headers.accept = 'application/json'
       }
       this._logger.debug(`Initiating a ${method} request on ${url} with
         headers: ${JSON.stringify(headers)}

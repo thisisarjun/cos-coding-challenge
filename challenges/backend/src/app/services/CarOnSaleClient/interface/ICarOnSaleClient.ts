@@ -166,7 +166,7 @@ interface IVehicle{
 interface ISellerAccountFlags{
     shouldApplyStandingCosts: boolean
 }
-interface IRunningAuctions {
+export interface IRunningAuctions {
     id: number,
     label: string,
     endingTime: string,
@@ -258,6 +258,9 @@ interface IRunningAuctions {
  */
 export interface ICarOnSaleClient {
 
-    getRunningAuctions(): Promise<IRunningAuctions[]>
+    getRunningAuctions(credentials:{
+        userId: string,
+		password: string
+    }): Promise<IRunningAuctions[]>
 
 }
