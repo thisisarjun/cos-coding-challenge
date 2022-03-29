@@ -5,6 +5,10 @@ import {DependencyIdentifier} from "./DependencyIdentifiers";
 import {AuctionMonitorApp} from "./AuctionMonitorApp";
 import { ICarOnSaleClient } from "./services/CarOnSaleClient/interface/ICarOnSaleClient";
 import { CarOnSaleClient } from "./services/CarOnSaleClient/classes/CarOnSaleClient";
+import { IConnector } from "./services/Connector/interface/IConnector";
+import { Connector } from "./services/Connector/classes/Connector";
+import { IAuthentication } from "./services/Authentication/interface/IAuthentication";
+import { Authentication } from "./services/Authentication/classes/Authentication";
 
 /*
  * Create the DI container.
@@ -18,6 +22,8 @@ const container = new Container({
  */
 container.bind<ILogger>(DependencyIdentifier.LOGGER).to(Logger);
 container.bind<ICarOnSaleClient>(DependencyIdentifier.CAR_ON_SALE_CLIENT).to(CarOnSaleClient);
+container.bind<IConnector>(DependencyIdentifier.CONNECTOR).to(Connector);
+container.bind<IAuthentication>(DependencyIdentifier.AUTHENTICATION).to(Authentication);
 
 
 /*

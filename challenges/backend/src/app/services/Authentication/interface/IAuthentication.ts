@@ -1,4 +1,4 @@
-interface IAuthenticationResult{
+export interface IAuthenticationResult{
   authenticated: boolean,
   userId: string,
   internalUserId: number,
@@ -10,7 +10,7 @@ interface IAuthenticationResult{
 
 export interface IAuthentication{
 
-	createAuthToken(credentials: {
+	generateAuthToken(credentials: {
 		userId: string,
 		password: string
 	}): Promise<IAuthenticationResult>

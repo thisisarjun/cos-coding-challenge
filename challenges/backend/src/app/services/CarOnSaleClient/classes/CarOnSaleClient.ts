@@ -5,7 +5,5 @@ import { ICarOnSaleClient } from "../interface/ICarOnSaleClient";
 export class CarOnSaleClient implements ICarOnSaleClient{
 
 	// @ts-ignore
-	public getRunningAuctions(): Promise<IRunningAuctions[]> {
-
-	}
+	public getRunningAuctions(): Promise<IRunningAuctions[]> {}
 }
