@@ -22,20 +22,20 @@ export class AuctionMonitorApp {
     }
 
     public async start(): Promise<void> {
-        this.logger.log(`Auction Monitor started.`);
-        this.logger.log(`Fetching Running Auctions from ConS API`);
+        this.logger.info(`Auction Monitor started.`);
+        this.logger.info(`Fetching Running Auctions from ConS API`);
         const runningAuctionResponse = await this.carOnSaleClient.getRunningAuctions({
             userId: this.userId,
             password: this.password
         });
         if(_.isEmpty(runningAuctionResponse) || _.isEmpty(runningAuctionResponse?.items)){
-            this.logger.log(`No Auctions at this point. comeback later :)`);
+            this.logger.info(`No Auctions at this point. comeback later :)`);
         }
         const totalAuctions = this.aggHelper.calculateNumberOfAuctions(runningAuctionResponse);
         const avgBids = this.aggHelper.calculateAvgNoOfBidsOnAuction(runningAuctionResponse.items, totalAuctions);
         const avgPercentOfAuctionProgress = this.aggHelper.calculateAvgPercentOfAuctionProgress(runningAuctionResponse.items);
 
-        this.logger.log(`
+        this.logger.info(`
             ---- RESULTS ----
             Total Auctions: ${totalAuctions}
             Average Bids : ${avgBids}

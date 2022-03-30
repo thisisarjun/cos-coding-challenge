@@ -45,7 +45,7 @@ const app = container.resolve(AuctionMonitorApp);
 (async () => {
     try{
         await app.start();
-        logger.log(`Succesfully finished. exiting`);
+        logger.info(`Succesfully finished. exiting`);
         process.exit(0);
     }catch(err:any){
         logger.error(`Error in auction monitoring, Error: ${err?.message}`);

@@ -15,16 +15,16 @@ export class Logger implements ILogger {
         this._winston = winston;
     }
 
-    public log(message: string, obj?: Record<string, any>): void {
-        this._winston.getLogger().info(`[LOG]: ${message}`, obj);
+    public info(message: string, obj?: Record<string, any>): void {
+        this._winston.getLogger().info(`${message}`, obj);
     }
 
     public error(message: string, obj?: Record<string, any>): void {
-        this._winston.getLogger().error(`[ERROR]: ${message}`, obj);
+        this._winston.getLogger().error(`${message}`, obj);
     }
 
     public debug(message: string, obj?: Record<string, any>): void {
-        this._winston.getLogger().debug(`[DEBUG]: ${message}`, obj);
+        this._winston.getLogger().debug(`${message}`, obj);
     }
 
 }

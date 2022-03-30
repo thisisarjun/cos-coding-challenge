@@ -42,7 +42,7 @@ export class Authentication implements IAuthentication {
       method: 'PUT',
       data
     });
-    this._logger.log('Succesfully authenticated');
+    this._logger.info('Succesfully authenticated');
     return authDetails as IAuthenticationResult;
 
   }

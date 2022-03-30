@@ -10,8 +10,11 @@ export class WinstonLogger implements IWinstonLogger {
     timestamp: () => new Date().toISOString(),
     format: format.combine(
       format.colorize({ all: true }),
+      format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),
       format.printf(
-       info => `${info.timestamp} ${info.filename} [${info.level}]: ${info.message}`
+       info => {
+        return `${info.timestamp} [${info.level}]: ${info.message}`;
+       }
       )
     )
   };
