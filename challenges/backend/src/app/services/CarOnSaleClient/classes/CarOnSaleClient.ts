@@ -3,7 +3,7 @@ import { DependencyIdentifier } from "../../../DependencyIdentifiers";
 import { IAuthentication } from "../../Authentication/interface/IAuthentication";
 import { IConnector } from "../../Connector/interface/IConnector";
 import { ILogger } from "../../Logger/interface/ILogger";
-import { ICarOnSaleClient, IRunningAuctions } from "../interface/ICarOnSaleClient";
+import { ICarOnSaleClient, IRunningAuctionsResult } from "../interface/ICarOnSaleClient";
 import config = require('config');
 import urlJoin from 'url-join';
 
@@ -27,7 +27,7 @@ export class CarOnSaleClient implements ICarOnSaleClient{
 	private async callGetRunningAuctionsAPI(input: {
 		token: string,
 		userId: string
-	}):Promise<IRunningAuctions[]>{
+	}):Promise<IRunningAuctionsResult>{
 		const url = urlJoin(
 			config.get('carOnSale.host'),
 			config.get('carOnSale.paths.getRunningAuctions')
@@ -46,14 +46,14 @@ export class CarOnSaleClient implements ICarOnSaleClient{
 			}
 		});
 		this._logger.debug(`Succesfully fetched running auctions`)
-		return runningAuctions as IRunningAuctions[];
+		return runningAuctions as IRunningAuctionsResult;
 
 	}
 
 	public async getRunningAuctions(credentials: {
 		userId: string,
 		password: string
-	}): Promise<IRunningAuctions[]> {
+	}): Promise<IRunningAuctionsResult> {
 		const {
 			password,
 			userId

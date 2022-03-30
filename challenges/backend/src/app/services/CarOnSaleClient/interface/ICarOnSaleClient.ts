@@ -253,6 +253,12 @@ export interface IRunningAuctions {
     isTransportationAvailable: boolean,
 }
 
+export interface IRunningAuctionsResult {
+    items: IRunningAuctions[],
+    page: number,
+    total: number
+}
+
 /**
  * This service describes an interface to access auction data from the CarOnSale API.
  */
@@ -261,6 +267,6 @@ export interface ICarOnSaleClient {
     getRunningAuctions(credentials:{
         userId: string,
 		password: string
-    }): Promise<IRunningAuctions[]>
+    }): Promise<IRunningAuctionsResult>
 
 }
