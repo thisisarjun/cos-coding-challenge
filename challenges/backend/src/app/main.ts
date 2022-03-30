@@ -11,6 +11,8 @@ import { IAuthentication } from "./services/Authentication/interface/IAuthentica
 import { Authentication } from "./services/Authentication/classes/Authentication";
 import { IAggregationHelper } from "./services/AggregationHelper/interface/IAggregationHelper";
 import { AggregationHelper } from "./services/AggregationHelper/classes/AggregationHelper";
+import { IWinstonLogger } from "./services/Logger/interface/IWinstonLogger";
+import { WinstonLogger } from "./services/Logger/classes/WinstonLogger";
 
 /*
  * Create the DI container.
@@ -23,6 +25,7 @@ const container = new Container({
  * Register dependencies in DI environment.
  */
 container.bind<ILogger>(DependencyIdentifier.LOGGER).to(Logger);
+container.bind<IWinstonLogger>(DependencyIdentifier.WINSTON_LOGGER).to(WinstonLogger);
 container.bind<ICarOnSaleClient>(DependencyIdentifier.CAR_ON_SALE_CLIENT).to(CarOnSaleClient);
 container.bind<IConnector>(DependencyIdentifier.CONNECTOR).to(Connector);
 container.bind<IAuthentication>(DependencyIdentifier.AUTHENTICATION).to(Authentication);

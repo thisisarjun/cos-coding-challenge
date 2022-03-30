@@ -3,5 +3,6 @@ export const DependencyIdentifier = {
     CAR_ON_SALE_CLIENT: "CarOnSaleClient",
     CONNECTOR: "Connector",
     AUTHENTICATION: "Authentication",
-    AGGREGATION_HELPER: "AggregationHelper"
+    AGGREGATION_HELPER: "AggregationHelper",
+    WINSTON_LOGGER: "WinstonLogger"
 };
