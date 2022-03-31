@@ -34,13 +34,18 @@ export class AuctionMonitorApp {
         const totalAuctions = this.aggHelper.calculateNumberOfAuctions(runningAuctionResponse);
         const avgBids = this.aggHelper.calculateAvgNoOfBidsOnAuction(runningAuctionResponse.items, totalAuctions);
         const avgPercentOfAuctionProgress = this.aggHelper.calculateAvgPercentOfAuctionProgress(runningAuctionResponse.items);
-
-        this.logger.info(`
-            ---- RESULTS ----
-            Total Auctions: ${totalAuctions}
-            Average Bids : ${avgBids}
-            Average percentage of the auction progress: ${JSON.stringify(avgPercentOfAuctionProgress, null, 4)}
-        `)
+        let finalOutput = `
+        ---- RESULTS ----
+        Total Auctions: ${totalAuctions}
+        Average Bids : ${avgBids}
+        `;
+        for (const value of avgPercentOfAuctionProgress){
+            finalOutput += `\nAverage percentage of the Auction Progress for ${value.label} -> ${value.auctionProgressPercent}%`
+        }
+        finalOutput+= `
+        ---- RESULTS END ----
+        `
+        this.logger.info(finalOutput)
 
     }
 

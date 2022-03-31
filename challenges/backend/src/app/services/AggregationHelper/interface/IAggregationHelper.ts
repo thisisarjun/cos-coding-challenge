@@ -2,7 +2,8 @@ import { IRunningAuctions, IRunningAuctionsResult } from "../../CarOnSaleClient/
 
 export interface IAuctionProgressPercent {
   auctionId: number,
-  auctionProgressPercent: number
+  auctionProgressPercent: number,
+  label: string
 }
 
 export interface IAggregationHelper{

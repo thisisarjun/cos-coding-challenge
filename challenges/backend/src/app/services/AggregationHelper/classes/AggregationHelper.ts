@@ -15,7 +15,8 @@ export class AggregationHelper implements IAggregationHelper{
       const auctionProgressPercent = Math.round((value.currentHighestBidValue/value.minimumRequiredAsk) * 100);
       auctionProgress.push({
         auctionId: value.id,
-        auctionProgressPercent
+        auctionProgressPercent,
+        label: value.label
       });
     }
     return auctionProgress;

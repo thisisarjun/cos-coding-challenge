@@ -1,4 +1,3 @@
-// TODO: mark optional attributes + double check
 interface IVehicleTechStateIVehicleTechState{
     part: number,
     state: number,
