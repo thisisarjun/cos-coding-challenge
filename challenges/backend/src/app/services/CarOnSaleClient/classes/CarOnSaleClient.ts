@@ -10,68 +10,68 @@ import urlJoin from 'url-join';
 @injectable()
 export class CarOnSaleClient implements ICarOnSaleClient{
 
-	private _logger:ILogger;
-	private _auth: IAuthentication;
-	private _connector:IConnector
+    private _logger:ILogger;
+    private _auth: IAuthentication;
+    private _connector:IConnector
 
-	public constructor(
-		@inject(DependencyIdentifier.LOGGER) logger: ILogger,
-		@inject(DependencyIdentifier.AUTHENTICATION) auth: IAuthentication,
-		@inject(DependencyIdentifier.CONNECTOR) connector: IConnector,
-	){
-		this._auth = auth;
-		this._logger = logger;
-		this._connector = connector;
-	}
+    public constructor(
+        @inject(DependencyIdentifier.LOGGER) logger: ILogger,
+        @inject(DependencyIdentifier.AUTHENTICATION) auth: IAuthentication,
+        @inject(DependencyIdentifier.CONNECTOR) connector: IConnector,
+    ){
+        this._auth = auth;
+        this._logger = logger;
+        this._connector = connector;
+    }
 
-	private async callGetRunningAuctionsAPI(input: {
-		token: string,
-		userId: string
-	}):Promise<IRunningAuctionsResult>{
-		const url = urlJoin(
-			config.get('carOnSale.host'),
-			config.get('carOnSale.paths.getRunningAuctions')
-		)
-		const {
-			token,
-			userId
-		} = input;
+    private async callGetRunningAuctionsAPI(input: {
+        token: string,
+        userId: string
+    }):Promise<IRunningAuctionsResult>{
+        const url = urlJoin(
+            config.get('carOnSale.host'),
+            config.get('carOnSale.paths.getRunningAuctions')
+        )
+        const {
+            token,
+            userId
+        } = input;
 
-		const runningAuctions = await this._connector.requestExternalService({
-			url,
-			method: 'GET',
-			headers: {
-				userId,
-				authToken: token
-			}
-		});
-		this._logger.debug(`Succesfully fetched running auctions`)
-		return runningAuctions as IRunningAuctionsResult;
+        const runningAuctions = await this._connector.requestExternalService({
+            url,
+            method: 'GET',
+            headers: {
+                userId,
+                authToken: token
+            }
+        });
+        this._logger.debug(`Succesfully fetched running auctions`)
+        return runningAuctions as IRunningAuctionsResult;
 
-	}
+    }
 
-	public async getRunningAuctions(credentials: {
-		userId: string,
-		password: string
-	}): Promise<IRunningAuctionsResult> {
-		const {
-			password,
-			userId
-		} = credentials;
+    public async getRunningAuctions(credentials: {
+        userId: string,
+        password: string
+    }): Promise<IRunningAuctionsResult> {
+        const {
+            password,
+            userId
+        } = credentials;
 
-		const authDetails = await this._auth.generateAuthToken({
-			password,
-			userId
-		});
+        const authDetails = await this._auth.generateAuthToken({
+            password,
+            userId
+        });
 
-		const {
-			token
-		} = authDetails;
+        const {
+            token
+        } = authDetails;
 
-		return this.callGetRunningAuctionsAPI({
-			token,
-			userId
-		});
+        return this.callGetRunningAuctionsAPI({
+            token,
+            userId
+        });
 
-	}
+    }
 }

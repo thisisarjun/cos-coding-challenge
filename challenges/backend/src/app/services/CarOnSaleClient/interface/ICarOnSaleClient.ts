@@ -266,7 +266,7 @@ export interface ICarOnSaleClient {
 
     getRunningAuctions(credentials:{
         userId: string,
-		password: string
+        password: string
     }): Promise<IRunningAuctionsResult>
 
 }

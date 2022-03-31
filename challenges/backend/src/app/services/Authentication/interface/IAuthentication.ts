@@ -10,8 +10,8 @@ export interface IAuthenticationResult{
 
 export interface IAuthentication{
 
-	generateAuthToken(credentials: {
-		userId: string,
-		password: string
-	}): Promise<IAuthenticationResult>
+    generateAuthToken(credentials: {
+        userId: string,
+        password: string
+    }): Promise<IAuthenticationResult>
 }
